@@ -6,20 +6,20 @@
 
 RF24 radio(CE_PIN, CSN_PIN);
 
-byte address[11] = "SimpleNode";
+byte address[11] = "Sandro";
 //unsigned long payload = 0;
 
 void setup() {
-  radio.begin(); // Start up the radio
-  radio.setAutoAck(1); // Ensure autoACK is enabled
-  radio.setRetries(15,15); // Max delay between retries & number of retries
-  radio.openWritingPipe(address); // Write to device address 'SimpleNode'
+  radio.begin(); // Poner en marcha la radio
+  radio.setAutoAck(1); // Asegurar qee autoACK  esta habilitado
+  radio.setRetries(15,15); //Máximo retardo entre reintentos y número de reintentos
+  radio.openWritingPipe(address); // Escriba a la dirección del dispositivo
 }
 
 void loop(void){
-  for(int i = 0; i <=255; i++){
+  for(int i = 0; i <=60; i++){
     //payload++;
   radio.write( &i, sizeof(unsigned long) ); 
   } 
-  delay(30);
+  delay(100);
 }

@@ -1,2 +1,4 @@
 Uso esta librería:
 http://tmrh20.github.io/RF24/
+ide de arduino:
+arduino-1.6.5-r2

@@ -6,25 +6,28 @@
 
 RF24 radio(CE_PIN, CSN_PIN);
 
-byte address[11] = "SimpleNode";
+byte address[11] = "Sandro";
 unsigned long payload = 0;
+int led = 5; //PWM
 
 void setup() {
   Serial.begin(115200);
-  radio.begin(); // Start up the radio
-  radio.setAutoAck(1); // Ensure autoACK is enabled
-  radio.setRetries(15,15); // Max delay between retries & number of retries
-  radio.openReadingPipe(1, address); // Write to device address 'SimpleNode'
+  radio.begin(); // Poner en marcha la radio
+  radio.setAutoAck(1); // Asegurar qee autoACK  esta habilitado
+  radio.setRetries(15,15); //Máximo retardo entre reintentos y número de reintentos
+  radio.openReadingPipe(1, address); //Escriba a la dirección del dispositivo
   radio.startListening();
 }
 
 void loop(void){
+  pinMode(led, OUTPUT); // Habilitado como salida
   radio.stopListening();
   radio.startListening();
   radio.read( &payload, sizeof(unsigned long) );
   if(payload != 0){
     Serial.print("Escucha ");
+    analogWrite(led, int (payload));
     Serial.println(payload);
   }
-  delay(30);
+  delay(100);
 }
